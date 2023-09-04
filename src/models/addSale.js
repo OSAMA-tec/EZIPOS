@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 
 const saleSchema = new mongoose.Schema({
-    locations: {type: Boolean, required: true},
+    locations: {type: String, required: true},
     sellingPrice: { type: mongoose.Schema.Types.ObjectId, ref: 'Product' },
-    typeofService: {type: Boolean},
+    typeofService: {type: String},
     subscribe: { type: Boolean, default: false },
     customer:{ type: mongoose.Schema.Types.ObjectId, ref: 'Customer' },
 
@@ -15,6 +15,9 @@ const saleSchema = new mongoose.Schema({
     invoiceScheme: {type: String, required: true},
     invoiceNumber: { type: Number, required: true },
 
+
+
+    orderStatus:{type: String, default: "Received"},
     //Attach doc
     //select table
     //select service staff
