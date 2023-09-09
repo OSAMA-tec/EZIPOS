@@ -50,7 +50,7 @@ const saleSchema = new mongoose.Schema({
     //shippingDocs
 
 
-    amount: {type: Number, default: subTotal},
+    amount: {type: Number},
     paidOn: { type: Date, default: Date.now},
     paymentMethod:{type: String, required: true},
     paymentAccount:{type: mongoose.Schema.Types.ObjectId, ref: 'PaymentAccount' },
