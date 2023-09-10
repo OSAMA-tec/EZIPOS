@@ -36,6 +36,14 @@ const accountRoutes = require('./router/accountRoutes');
 // const financialRoutes = require('./router/financialRoutes');
 const kitchenRoutes = require('./router/kitchenRoutes');
 
+
+
+//report 
+const reportController = require('./router/reportController');
+
+
+
+
 const PORT = process.env.PORT || 8000;
 
 app.use(cors());
@@ -72,6 +80,13 @@ app.use('/admin/add-accounts', accountRoutes);
 
 // app.use('/finance', financialRoutes);
 app.use('/admin/kitchen', kitchenRoutes);
+
+
+
+
+
+//REPORT
+app.use('/admin/report', reportController);
 
 app.listen(PORT, () => {
   console.log(`Server is running on port ${PORT}`);
