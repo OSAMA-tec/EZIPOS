@@ -2,17 +2,18 @@
 const express = require('express');
 const router = express.Router();
 const warrantiesController = require('../controllers/warrantiesController');
+const authMiddleware = require('../../middleware/authMiddleware');
 
 // GET /warranties/all-records
-router.get('/all-records', warrantiesController.getAllWarranties);
+router.get('/all-records',authMiddleware, warrantiesController.getAllWarranties);
 
 // POST /warranties
-router.post('/', warrantiesController.createWarranty);
+router.post('/',authMiddleware, warrantiesController.createWarranty);
 
 // PUT /warranties/:id
-router.put('/:id', warrantiesController.updateWarranty);
+router.put('/:id',authMiddleware, warrantiesController.updateWarranty);
 
 // DELETE /warranties/:id
-router.delete('/:id', warrantiesController.deleteWarranty);
+router.delete('/:id',authMiddleware, warrantiesController.deleteWarranty);
 
 module.exports = router;

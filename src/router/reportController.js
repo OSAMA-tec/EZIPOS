@@ -9,27 +9,28 @@ const {itemsReport} = require('../controllers/Report/Item/items');
 const {productPurchase} = require('../controllers/Report/Product/product');
 const {productSale} = require('../controllers/Report/Product/productSale');
 
+const authMiddleware = require('../../middleware/authMiddleware');
 
 // Routes for profit 
-router.get('/profit', profitGet);
-router.get('/profit/category/:type', profitbyType);
+router.get('/profit',authMiddleware, profitGet);
+router.get('/profit/category/:type',authMiddleware, profitbyType);
 
 //Routes for Purchase Sale
-router.get('/purchase/:range', purchaseSale);
+router.get('/purchase/:range',authMiddleware, purchaseSale);
 
 
 //ALL STOCKS REPORT
-router.get('/stock', stockReport);
-router.get('/stockadjustment', StockAdjustment);
+router.get('/stock',authMiddleware, stockReport);
+router.get('/stockadjustment',authMiddleware, StockAdjustment);
 
 
 //Items Report
-router.get('/items', itemsReport);
+router.get('/items',authMiddleware, itemsReport);
 
 
 //Product report
-router.get('/product-purchase', productPurchase);
-router.get('/product-sale', productSale);
+router.get('/product-purchase',authMiddleware, productPurchase);
+router.get('/product-sale',authMiddleware, productSale);
 
 
 module.exports = router;

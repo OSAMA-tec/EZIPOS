@@ -1,7 +1,6 @@
 
 const Sale = require('../../../models/addSale');
-const StockAdjustment = require('../../../models/addStockadjustment');
-const StockTransfer = require('../../../models/addStocktransfer');
+
 const Product = require('../../../models/addProduct');
 //customer need
 

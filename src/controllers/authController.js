@@ -1,5 +1,8 @@
-// controllers/authController.js
 const Admin = require('../models/admin');
+const jwt = require('jsonwebtoken');
+const dotenv = require('dotenv');
+
+dotenv.config();
 
 // Login
 exports.login = async (req, res) => {
@@ -13,7 +16,15 @@ exports.login = async (req, res) => {
         }
 
         // Authentication successful
-        return res.status(200).json({ message: 'Login successful' });
+        const payload = {
+            _id: user._id,
+            userName: user.userName,
+            email: user.email
+        };
+
+        const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });
+
+        return res.status(200).json({ message: 'Login successful', token });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Internal server error' });

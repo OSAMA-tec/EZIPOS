@@ -1,17 +1,18 @@
 const express = require('express');
 const router = express.Router();
 const stockAdjustmentController = require('../controllers/stockAdjustmentController');
+const authMiddleware = require('../../middleware/authMiddleware');
 
 
 // Routes for stock adjustments
-router.post('/', stockAdjustmentController.createStockAdjustment);
+router.post('/', authMiddleware,stockAdjustmentController.createStockAdjustment);
 
-router.put('/:id', stockAdjustmentController.updateStockAdjustment);
+router.put('/:id',authMiddleware, stockAdjustmentController.updateStockAdjustment);
 
-router.delete('/:id', stockAdjustmentController.deleteStockAdjustment);
+router.delete('/:id',authMiddleware, stockAdjustmentController.deleteStockAdjustment);
 
-router.get('/:id', stockAdjustmentController.getStockAdjustmentById);
+router.get('/:id',authMiddleware, stockAdjustmentController.getStockAdjustmentById);
 
-router.get('/', stockAdjustmentController.getAllStockAdjustments);
+router.get('/', authMiddleware,stockAdjustmentController.getAllStockAdjustments);
 
 module.exports = router;

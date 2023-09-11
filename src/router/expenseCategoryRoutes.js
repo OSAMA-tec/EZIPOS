@@ -1,15 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const expenseCategoryController = require('../controllers/expenseCategoryController');
+const authMiddleware = require('../../middleware/authMiddleware');
 
 
 // Routes for expense categories
-router.post('/', expenseCategoryController.createExpenseCategory);
+router.post('/',authMiddleware, expenseCategoryController.createExpenseCategory);
 
-router.put('/:id', expenseCategoryController.updateExpenseCategory);
+router.put('/:id',authMiddleware, expenseCategoryController.updateExpenseCategory);
 
-router.delete('/:id', expenseCategoryController.deleteExpenseCategory);
+router.delete('/:id',authMiddleware, expenseCategoryController.deleteExpenseCategory);
 
-router.get('/', expenseCategoryController.getAllExpenseCategories);
+router.get('/',authMiddleware, expenseCategoryController.getAllExpenseCategories);
 
 module.exports = router;

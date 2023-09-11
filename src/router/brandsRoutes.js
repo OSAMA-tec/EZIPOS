@@ -2,17 +2,18 @@
 const express = require('express');
 const router = express.Router();
 const brandsController = require('../controllers/brandsController');
+const authMiddleware = require('../../middleware/authMiddleware');
 
 // GET /brands
-router.get('/', brandsController.getAllBrands);
+router.get('/',authMiddleware, brandsController.getAllBrands);
 
 // POST /brands
-router.post('/', brandsController.createBrand);
+router.post('/',authMiddleware, brandsController.createBrand);
 
 // PUT /brands/:id
-router.put('/:id', brandsController.updateBrand);
+router.put('/:id',authMiddleware, brandsController.updateBrand);
 
 // DELETE /brands/:id
-router.delete('/:id', brandsController.deleteBrand);
+router.delete('/:id',authMiddleware, brandsController.deleteBrand);
 
 module.exports = router;
