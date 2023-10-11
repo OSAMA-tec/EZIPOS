@@ -15,7 +15,7 @@ const adminSchema = new mongoose.Schema({
     zipCode: { type: Number },
     landmark: { type: String },
     timeZone: { type: String },
-
+    role: { type: String}, 
 
     tax1Name: { type: String },
     tax1No: { type: Number },

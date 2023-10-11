@@ -14,12 +14,13 @@ exports.login = async (req, res) => {
         if (!user || user.password !== password) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
-
+        
         // Authentication successful
         const payload = {
             _id: user._id,
             userName: user.userName,
-            email: user.email
+            email: user.email,
+            role:user.role
         };
 
         const token = jwt.sign(payload, process.env.JWT_SECRET, { expiresIn: '7d' });

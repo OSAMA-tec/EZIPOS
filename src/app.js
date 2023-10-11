@@ -2,6 +2,7 @@ const express = require('express');
 // const mongoose = require('mongoose');
 require("./db/connection")
 // require("./uploads")
+
 const cors = require('cors');
 const app = express();
 // console.log(app.use('/uploads',express.static('./uploads')));
@@ -52,6 +53,8 @@ app.use(express.json());
 // app.use('/', uploads);
 app.use(bodyParser.json());
 
+// parse application/x-www-form-urlencoded
+app.use(express.urlencoded({ extended: true }));
 // app.use('/user', userRoutes);
 // app.use('/admin', adminRoutes);
 

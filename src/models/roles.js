@@ -2,6 +2,7 @@ const mongoose = require('mongoose');
 
 const rolesSchema = new mongoose.Schema({
   name: { type: String, required: true },
+  userId: { type: mongoose.Schema.Types.ObjectId, ref: 'AddUser' }, // Reference to the Role collection
   servicestaff: {type: Boolean},
   viewexport: {type: Boolean},
 

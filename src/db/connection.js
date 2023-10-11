@@ -1,6 +1,6 @@
 const mongoose = require("mongoose");
 
-mongoose.connect('mongodb://127.0.0.1:27017/pos')
+mongoose.connect('mongodb+srv://osama:osama@cluster0.esdwjz0.mongodb.net/')
     .then(() => {
         console.log("Connection is successful");
     }).catch((e) =>{
