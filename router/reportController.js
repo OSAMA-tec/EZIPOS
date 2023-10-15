@@ -8,6 +8,8 @@ const {StockAdjustment} = require('../controllers/Report/Stock/stockAdjustment')
 const {itemsReport} = require('../controllers/Report/Item/items');
 const {productPurchase} = require('../controllers/Report/Product/product');
 const {productSale} = require('../controllers/Report/Product/productSale');
+const {generateReport} = require('../controllers/Report/Purchase/purchasePayment');
+const {getLotReport} = require('../controllers/Report/Lot/lot');
 
 // const authMiddleware = require('../../middleware/authMiddleware');
 
@@ -31,6 +33,15 @@ router.get('/items',itemsReport);
 //Product report
 router.get('/product-purchase', productPurchase);// done
 router.get('/product-sale',productSale);         // done
+
+
+//Purchase
+router.get('/purchase-payment', generateReport);
+
+
+
+//Lot
+router.get('/lot', getLotReport);
 
 
 module.exports = router;
