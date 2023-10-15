@@ -1,4 +1,4 @@
-const PurchasePayment = require('../../../models/PurchasePayment');
+const PurchasePayment = require('../../../models/purchasePayment');
 const Supplier = require('../../../models/Supplier');
 
 const generateReport = async (req, res) => {

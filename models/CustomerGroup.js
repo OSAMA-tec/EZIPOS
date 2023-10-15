@@ -21,7 +21,6 @@ const customerGroupSchema = new Schema({
         type: String,
         enum: ['retail', 'Saleman', 'Local Sale' ,'Minimum points','Sale Points'] // Add other possible values
     },
-    // ... (other fields)
 });
 
 const CustomerGroup = mongoose.model("CustomerGroup", customerGroupSchema);
