@@ -1,7 +1,6 @@
 
-const Register = require('../models/Register');
-const AddUser = require('../models/AddUser');
-const BusinessLocation = require('../models/BusinessLocation');
+const Register = require('../../../models/register');
+
 
 const registerReport= async (req, res) => {
   try {
