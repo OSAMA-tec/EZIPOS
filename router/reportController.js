@@ -11,6 +11,7 @@ const {productSale} = require('../controllers/Report/Product/productSale');
 const {generateReport} = require('../controllers/Report/Purchase/purchasePayment');
 const {getLotReport} = require('../controllers/Report/Lot/lot');
 const {getSellPaymentReport} = require('../controllers/Report/Sell/sellPayment');
+const {registerReport} = require('../controllers/Report/Register/registerReport');
 
 // const authMiddleware = require('../../middleware/authMiddleware');
 
@@ -47,6 +48,11 @@ router.get('/lot', getLotReport);
 
 //Sell
 router.get('/sell-payment', getSellPaymentReport);
+
+
+
+//Register
+router.get('/register-report', registerReport);
 
 
 

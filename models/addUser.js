@@ -2,28 +2,6 @@ const mongoose = require('mongoose');
 
 const addUserSchema = new mongoose.Schema({
 
-    // name: { type: String, required: true },
-    // startDate: { type: Date, required: true },
-    // currency: { type: String, required: true },
-    // logo: { type: String },
-    // website: { type: String },
-    // contactNumber: { type: Number },
-    // alternateContactNumber: { type: String },
-    // country: { type: String },
-    // state: { type: String },
-    // city: { type: String },
-    // zipCode: { type: Number },
-    // landmark: { type: String },
-    // timeZone: { type: String },
-
-
-    // tax1Name: { type: String },
-    // tax1No: { type: String },
-    // tax2Name: { type: String },
-    // tax2No: { type: String },
-    // financialYearStartMonth: { type: String },
-    // stockAccountingMethod: { type: String, enum: ['FIFO', 'LIFO'] },
-
 
     prefix: { type: String },
     firstName: { type: String, required: true },
@@ -38,17 +16,6 @@ const addUserSchema = new mongoose.Schema({
     
     // ROLES
     role: { type: mongoose.Schema.Types.ObjectId, ref: 'Role' }, // Reference to the Role collection
-
-
-    // allLocations: {type: Boolean },
-    // eziline: {type: Boolean },
-
-
-    // salesCommissionPercentage: { type: String },
-    // maxSaleDiscountPercentage: { type: String },
-    
-    
-    // allowselectedcontacts: {type: Boolean, required: true},
 
 
     dateOfBirth: { type: Date, default: Date.now},
