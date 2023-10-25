@@ -1,4 +1,3 @@
-// accountController.js
 
 const Account = require('../models/addAccount');
 

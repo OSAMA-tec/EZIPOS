@@ -1,6 +1,8 @@
 const mongoose = require('mongoose');
 
 const rolesSchema = new mongoose.Schema({
+
+  userId: { type: String },
   roleName: { type: String, required: true },
   serviceStaff: {type: Boolean},
   viewExport: {type: Boolean},
@@ -73,8 +75,6 @@ const rolesSchema = new mongoose.Schema({
   addSell: {type: Boolean},
   updateSell: {type: Boolean},
   deleteSell: {type: Boolean},
-
-  // commissionagentcanviewtheirownsell: {type: Boolean},
   
   addSellPayment: {type: Boolean},
   editSellPayment: {type: Boolean},
@@ -99,9 +99,6 @@ const rolesSchema = new mongoose.Schema({
 
   accessAllShipments: {type: Boolean},
   accessOwnShipments: {type: Boolean},
-  // accessPendingShipmentsOnly: {type: Boolean},
-  // commissionagentcanaccesstheirownshipments: {type: Boolean},
-
   viewCashRegister: {type: Boolean},
   closeCashRegister: {type: Boolean},
 
@@ -137,9 +134,7 @@ const rolesSchema = new mongoose.Schema({
   viewProductstockvalue: {type: Boolean},
 
   accessBusinessSettings: {type: Boolean},
-  // accessbarcodesettings: {type: Boolean},
   accessInvoiceSettings: {type: Boolean},
-  // accessprinters: {type: Boolean},
 
   accessAlleEpenses: {type: Boolean},
   viewOwnExpenseOnly: {type: Boolean},
@@ -153,9 +148,6 @@ const rolesSchema = new mongoose.Schema({
   editAccountTransaction: {type: Boolean},
   deleteAccountTransaction: {type: Boolean},
 
-  // addeditviewallbookings: {type: Boolean},
-  // addeditviewownbookings: {type: Boolean},
-
   defaultSellingPrice: {type: Boolean},
   retail: {type: Boolean},
   saleMan: {type: Boolean},
@@ -163,51 +155,10 @@ const rolesSchema = new mongoose.Schema({
   minimumPrice: {type: Boolean},
   salePoint: {type: Boolean},
 
-  //   //restaurant
-  // accessTables: {type: Boolean},
-
-
-//   addeditviewdeleteleavetype: {type: Boolean},
-//   addeditviewdeleteallleave: {type: Boolean},
-//   addviewownleave: {type: Boolean},
-//   approveleave: {type: Boolean},
-//   addeditviewdeleteallattendance: {type: Boolean},
-//   viewownattendance: {type: Boolean},
-//   allowuserstoentertheirownattendancefromweb: {type: Boolean},
-//   allowuserstoentertheirownattendancefromapi: {type: Boolean},
-//   viewpaycomponent: {type: Boolean},
-//   addpaycomponent: {type: Boolean},
-//   addeditviewdeletedepartment: {type: Boolean},
-//   addeditviewdeletedesignation: {type: Boolean},
-//   viewallpayroll: {type: Boolean},
-//   addpayroll: {type: Boolean},
-//   editpayroll: {type: Boolean},
-//   deletepayroll: {type: Boolean},
-//   assigntodotoothers: {type: Boolean},
-//   addtodo: {type: Boolean},
-//   edittodo: {type: Boolean},
-//   deletetodo: {type: Boolean},
-//   createmessage: {type: Boolean},
-//   viewmessage: {type: Boolean},
-//   accesssalestargets: {type: Boolean},
-
   viewRecipe: {type: Boolean},
   addRecipe: {type: Boolean},
   editRecipe: {type: Boolean},
   accessProduction: {type: Boolean},
-
-//   createproject: {type: Boolean},
-//   editproject: {type: Boolean},
-//   deleteproject: {type: Boolean},
-
-// //   servicestaff: {type: Boolean},
-
-//   servicestaff: {type: Boolean},
-//   servicestaff: {type: Boolean},
-//   servicestaff: {type: Boolean},
-//   servicestaff: {type: Boolean},
-//   servicestaff: {type: Boolean},
-
 
 });
 

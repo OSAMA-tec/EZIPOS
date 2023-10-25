@@ -1,34 +1,13 @@
 // controllers/authController.js
 const Admin = require('../models/admin');
 const User = require('../models/addUser'); 
-
-// Login
-// exports.login = async (req, res) => {
-//     const { userName, password } = req.body;
-
-//     try {
-//         const user = await Admin.findOne({ userName });
-
-//         if (!user || user.password !== password) {
-//             return res.status(401).json({ message: 'Invalid credentials' });
-//         }
-
-//         // Authentication successful
-//         return res.status(200).json({ message: 'Login successful' });
-//     } catch (error) {
-//         console.error(error);
-//         return res.status(500).json({ message: 'Internal server error' });
-//     }
-// };
-
+const Role = require('../models/roles');
 
 
 exports.login = async (req, res) => {
     const { userName, password } = req.body;
 
     try {
-        // console.log(req.body)
-        // Check if the user exists in either Admin or User schemas
         const user = await Admin.findOne({ userName }).lean();
         const userInUserSchema = await User.findOne({ userName }).lean();
 
@@ -36,16 +15,36 @@ exports.login = async (req, res) => {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
-        // Check if the provided password matches in either Admin or User schemas
+        let roleModel;
+        let role;
         if (user && user.password === password) {
-            // Authentication successful for Admin
-            return res.status(200).json({ message: 'Login successful for Admin' });
+            role = 'Admin';
+            roleModel = await Role.findOne({ userId: user._id });
+            if (!roleModel) {
+                roleModel = new Role({ userId: user._id });
+                await roleModel.save();
+            }
         } else if (userInUserSchema && userInUserSchema.password === password) {
-            // Authentication successful for User
-            return res.status(200).json({ message: 'Login successful for User' });
+            role = 'User';
+            roleModel = await Role.findOne({ userId: userInUserSchema._id });
+            if (!roleModel) {
+                roleModel = new Role({ userId: userInUserSchema._id });
+                await roleModel.save();
+            }
         } else {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
+
+        // Create a JWT
+        const token = jwt.sign(
+            { userName, role, roleModel },
+            process.env.JWT_SECRET,
+            { expiresIn: '60d' } 
+        );
+
+        // Send the token in the response
+        return res.status(200).json({ message: `Login successful for ${role}`, token });
+
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: 'Internal server error' });
