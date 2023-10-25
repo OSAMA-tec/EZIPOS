@@ -1,15 +1,21 @@
 const express = require('express');
 const router = express.Router();
-const expenseCategoryController = require('../controllers/expenseCategoryController');
+const draftsController = require('../controllers/draftsController');
+const checkPermission = require('../middleware/checkPermission');
 
+// GET /drafts/all-records
+router.get('/all-records', checkPermission('viewAllDrafts'), draftsController.getAllDrafts);
 
-// Routes for expense categories
-router.post('/', expenseCategoryController.createExpenseCategory);
+// POST /drafts
+router.post('/', checkPermission('editDraft'), draftsController.createDraft);
 
-router.put('/:id', expenseCategoryController.updateExpenseCategory);
+// GET /drafts/:id
+router.get('/:id', checkPermission('viewAllDrafts'), draftsController.getDraftById);
 
-router.delete('/:id', expenseCategoryController.deleteExpenseCategory);
+// PUT /drafts/:id
+router.put('/:id', checkPermission('editDraft'), draftsController.updateDraft);
 
-router.get('/', expenseCategoryController.getAllExpenseCategories);
+// DELETE /drafts/:id
+router.delete('/:id', checkPermission('deleteDraft'), draftsController.deleteDraft);
 
 module.exports = router;

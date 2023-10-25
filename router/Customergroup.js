@@ -1,15 +1,12 @@
-const express = require('express')
+const express = require('express');
 const router = express.Router();
+const { getAllCustomerGroups, createCustomerGroup, updateCustomerGroup, deleteCustomerGroup } = require("../controllers/CustomerGroup");
+const checkPermission = require('../middleware/checkPermission');
 
-const {getAllCustomerGroups,createCustomerGroup,updateCustomerGroup, deleteCustomerGroup}=require("../controllers/CustomerGroup")
+router.get('/contact/customergroup', checkPermission('viewCustomerGroup'), getAllCustomerGroups);
 
-router.get('/contact/customergroup',getAllCustomerGroups);
-
-router.post('/contact/customergroup', createCustomerGroup);
-router.put('/contact/customergroup/:id', updateCustomerGroup);
-router.delete('/contact/customergroup/:id', deleteCustomerGroup);
-
-
-
+router.post('/contact/customergroup', checkPermission('addCustomerGroup'), createCustomerGroup);
+router.put('/contact/customergroup/:id', checkPermission('editCustomerGroup'), updateCustomerGroup);
+router.delete('/contact/customergroup/:id', checkPermission('deleteCustomerGroup'), deleteCustomerGroup);
 
 module.exports = router;

@@ -1,21 +1,21 @@
-// routes/brandsRoutes.js
 const express = require('express');
 const router = express.Router();
 const brandsController = require('../controllers/brandsController');
+const {checkPermission}=require('../middleware/checkPermission');
 
 // GET /brands
-router.get('/', brandsController.getAllBrands);
+router.get('/', checkPermission('viewBrand'), brandsController.getAllBrands);
 
 // POST /brands
-router.post('/', brandsController.createBrand);
+router.post('/', checkPermission('addBrand'), brandsController.createBrand);
 
 // PUT /brands/:id
-router.put('/:id', brandsController.updateBrand);
+router.put('/:id', checkPermission('editBrand'), brandsController.updateBrand);
 
 // DELETE /brands/:id
-router.delete('/:id', brandsController.deleteBrand);
+router.delete('/:id', checkPermission('deleteBrand'), brandsController.deleteBrand);
 
 // Get /brandsbyid
-router.get('/:id', brandsController.getBrandsById);
+router.get('/:id', checkPermission('viewBrand'), brandsController.getBrandsById);
 
 module.exports = router;

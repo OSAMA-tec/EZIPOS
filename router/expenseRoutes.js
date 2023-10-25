@@ -1,17 +1,17 @@
 const express = require('express');
 const router = express.Router();
 const expenseController = require('../controllers/expenseController');
-
+const checkPermission = require('../middleware/checkPermission');
 
 // Routes for expenses
-router.post('/', expenseController.createExpense);
+router.post('/', checkPermission('addExpense'), expenseController.createExpense);
 
-router.put('/:id', expenseController.updateExpense);
+router.put('/:id', checkPermission('editExpense'), expenseController.updateExpense);
 
-router.delete('/:id', expenseController.deleteExpense);
+router.delete('/:id', checkPermission('deleteExpense'), expenseController.deleteExpense);
 
-router.get('/:id', expenseController.getExpenseById);
+router.get('/:id', checkPermission('accessAlleEpenses'), expenseController.getExpenseById);
 
-router.get('/', expenseController.getAllExpenses);
+router.get('/', checkPermission('accessAlleEpenses'), expenseController.getAllExpenses);
 
 module.exports = router;

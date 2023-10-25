@@ -1,21 +1,21 @@
-// routes/draftsRoutes.js
 const express = require('express');
 const router = express.Router();
 const draftsController = require('../controllers/draftsController');
+const checkPermission = require('../middleware/checkPermission'); 
 
 // GET /drafts/all-records
-router.get('/all-records', draftsController.getAllDrafts);
+router.get('/all-records', checkPermission('viewAllDrafts'), draftsController.getAllDrafts);
 
 // POST /drafts
-router.post('/', draftsController.createDraft);
+router.post('/', checkPermission('editDraft'), draftsController.createDraft);
 
 // GET /drafts/:id
-router.get('/:id', draftsController.getDraftById);
+router.get('/:id', checkPermission('viewAllDrafts'), draftsController.getDraftById);
 
 // PUT /drafts/:id
-router.put('/:id', draftsController.updateDraft);
+router.put('/:id', checkPermission('editDraft'), draftsController.updateDraft);
 
 // DELETE /drafts/:id
-router.delete('/:id', draftsController.deleteDraft);
+router.delete('/:id', checkPermission('deleteDraft'), draftsController.deleteDraft);
 
 module.exports = router;

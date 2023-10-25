@@ -2,15 +2,16 @@
 const express = require('express');
 const router = express.Router();
 const invoiceController = require('../controllers/invoiceController');
+const checkPermission = require('../middleware/checkPermission'); 
 
-router.post('', invoiceController.createInvoice);
+router.post('', checkPermission('addSell'), invoiceController.createInvoice);
 
-router.put('/:id', invoiceController.updateInvoiceById);
+router.put('/:id', checkPermission('updateSell'), invoiceController.updateInvoiceById);
 
-router.delete('/:id', invoiceController.deleteInvoiceById);
+router.delete('/:id', checkPermission('deleteSell'), invoiceController.deleteInvoiceById);
 
-router.get('/:id', invoiceController.viewInvoiceById);
+router.get('/:id', checkPermission('viewAllSell'), invoiceController.viewInvoiceById);
 
-router.get('', invoiceController.viewAllInvoices);
+router.get('', checkPermission('viewAllSell'), invoiceController.viewAllInvoices);
 
 module.exports = router;
