@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const posController = require('../controllers/posController');
-const checkPermission = require('../middleware/checkPermission');
+const {checkPermission} = require('../middleware/checkPermission');
 
 // GET Sales Shipment Status
 router.get('/shipments', checkPermission('viewAllSell'), posController.salePosShipment);

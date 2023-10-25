@@ -2,20 +2,21 @@
 const express = require('express');
 const router = express.Router();
 const unitsController = require('../controllers/unitsController');
+const {checkPermission} = require('../middleware/checkPermission');
 
 // GET /units
-router.get('/', unitsController.getAllUnits);
+router.get('/', checkPermission('viewUnit'), unitsController.getAllUnits);
 
 // POST /units
-router.post('/', unitsController.createUnit);
+router.post('/', checkPermission('addUnit'), unitsController.createUnit);
 
 // PUT /units/:id
-router.put('/:id', unitsController.updateUnit);
+router.put('/:id', checkPermission('editUnit'), unitsController.updateUnit);
 
 // DELETE /units/:id
-router.delete('/:id', unitsController.deleteUnit);
+router.delete('/:id', checkPermission('deleteUnit'), unitsController.deleteUnit);
 
 // Get /userbyid
-router.get('/:id', unitsController.getUnitsById);
+router.get('/:id', checkPermission('viewUnit'), unitsController.getUnitsById);
 
 module.exports = router;

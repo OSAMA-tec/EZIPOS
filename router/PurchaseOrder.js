@@ -1,13 +1,11 @@
 const express=require('express');
 const router=express.Router();
-
 const {getAllPurchaseOrder,addPurchaseOrder,updatePurchaseOrder,deletePurchaseOrder}=require("../controllers/PurchaseOrder");
+const {checkPermission} = require('../middleware/checkPermission'); 
 
-router.get('/purchase-order',getAllPurchaseOrder);
-router.post('/purchase-order/create',addPurchaseOrder);
-router.put('/purchase-order/:id',updatePurchaseOrder);
-router.delete('/purchase-order/:id',deletePurchaseOrder);
-
-
+router.get('/purchase-order', checkPermission('viewAllPurchaseOrder'), getAllPurchaseOrder);
+router.post('/purchase-order/create', checkPermission('createPurchaseOrder'), addPurchaseOrder);
+router.put('/purchase-order/:id', checkPermission('editPurchaseOrder'), updatePurchaseOrder);
+router.delete('/purchase-order/:id', checkPermission('deletePurchaseOrder'), deletePurchaseOrder);
 
 module.exports=router;

@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const draftsController = require('../controllers/draftsController');
-const checkPermission = require('../middleware/checkPermission'); 
+const {checkPermission} = require('../middleware/checkPermission'); 
 
 // GET /drafts/all-records
 router.get('/all-records', checkPermission('viewAllDrafts'), draftsController.getAllDrafts);

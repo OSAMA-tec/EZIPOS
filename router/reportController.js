@@ -14,59 +14,42 @@ const {getSellPaymentReport} = require('../controllers/Report/Sell/sellPayment')
 const {registerReport} = require('../controllers/Report/Register/registerReport');
 const {getSalesReport} = require('../controllers/Report/Sales/saleRes');
 const {getTaxReport} = require('../controllers/Report/Tax/taxReport');
-
-// const authMiddleware = require('../../middleware/authMiddleware');
+const {checkPermission} = require('../middleware/checkPermission'); 
 
 // Routes for profit 
-router.get('/profit', profitGet);
-router.get('/profit/category', profitbyType);
+router.get('/profit', checkPermission('viewProfit'), profitGet);
+router.get('/profit/category', checkPermission('viewProfit'), profitbyType);
 
 //Routes for Purchase Sale
-router.get('/purchase/:range', purchaseSale);
-
+router.get('/purchase/:range', checkPermission('viewPurchaseSale'), purchaseSale);
 
 //ALL STOCKS REPORT
-router.get('/stock', stockReport);
-router.get('/stockadjustment', StockAdjustment);
-
+router.get('/stock', checkPermission('viewStockReport'), stockReport);
+router.get('/stockadjustment', checkPermission('viewStockAdjustment'), StockAdjustment);
 
 //Items Report
-router.get('/items',itemsReport);
-
+router.get('/items', checkPermission('viewItemsReport'), itemsReport);
 
 //Product report
-router.get('/product-purchase', productPurchase);// done
-router.get('/product-sale',productSale);         // done
-
+router.get('/product-purchase', checkPermission('viewProductPurchase'), productPurchase);
+router.get('/product-sale', checkPermission('viewProductSale'), productSale);
 
 //Purchase
-router.get('/purchase-payment', generateReport);
-
-
+router.get('/purchase-payment', checkPermission('viewPurchasePayment'), generateReport);
 
 //Lot
-router.get('/lot', getLotReport);
-
+router.get('/lot', checkPermission('viewLotReport'), getLotReport);
 
 //Sell
-router.get('/sell-payment', getSellPaymentReport);
-
-
+router.get('/sell-payment', checkPermission('viewSellPaymentReport'), getSellPaymentReport);
 
 //Register
-router.get('/register-report', registerReport);
-
-
+router.get('/register-report', checkPermission('viewRegisterReport'), registerReport);
 
 //Sale Representative
-router.get('/sale-representative', getSalesReport);
-
-
-
+router.get('/sale-representative', checkPermission('viewSalesReport'), getSalesReport);
 
 //Tax Report
-router.get('/tax-report', getTaxReport);
-
-
+router.get('/tax-report', checkPermission('viewTaxReport'), getTaxReport);
 
 module.exports = router;

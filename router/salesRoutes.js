@@ -2,24 +2,24 @@
 const express = require('express');
 const router = express.Router();
 const salesController = require('../controllers/salesController');
+const {checkPermission} = require('../middleware/checkPermission'); 
+
 //GET Sales Shipment Status
-router.get('/shipments', salesController.saleShipment);
+router.get('/shipments', checkPermission('accessAllShipments'), salesController.saleShipment);
 
 // GET /sales/all-records
-router.get('/:type', salesController.getAllSales);
+router.get('/:type', checkPermission('viewAllSell'), salesController.getAllSales);
 
 // POST /sales
-router.post('/:type', salesController.createSale);
+router.post('/:type', checkPermission('addSell'), salesController.createSale);
 
 // GET /sales/:id
-router.get('/:type/:id', salesController.getSaleById);
+router.get('/:type/:id', checkPermission('viewAllSell'), salesController.getSaleById);
 
 // PUT /sales/:id
-router.put('/:type/:id', salesController.updateSale);
+router.put('/:type/:id', checkPermission('updateSell'), salesController.updateSale);
 
 // DELETE /sales/:id
-router.delete('/:type/:id', salesController.deleteSale);
-
-
+router.delete('/:type/:id', checkPermission('deleteSell'), salesController.deleteSale);
 
 module.exports = router;

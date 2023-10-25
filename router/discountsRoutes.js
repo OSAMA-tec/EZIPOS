@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const discountsController = require('../controllers/discountsController');
-const checkPermission = require('../middleware/checkPermission'); 
+const {checkPermission} = require('../middleware/checkPermission'); 
 
 // POST /discounts
 router.post('/', checkPermission('addEditDeleteDiscount'), discountsController.createDiscount);

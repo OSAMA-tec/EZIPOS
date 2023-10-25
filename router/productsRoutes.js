@@ -2,7 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const productsController = require('../controllers/productsController');
-const checkPermission = require('../middleware/checkPermission'); 
+const {checkPermission} = require('../middleware/checkPermission'); 
 
 // GET /products
 router.get('/', checkPermission('viewProduct'), productsController.getAllProducts);

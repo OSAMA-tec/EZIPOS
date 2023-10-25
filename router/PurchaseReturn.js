@@ -1,12 +1,11 @@
-const express=require('express');
-const router=express.Router();
+const express = require('express');
+const router = express.Router();
+const { getAllPurchase, updatePurchaseReturnById, createPurchaseReturn, deletePurchaseReturnById } = require('../controllers/PurchaseReturn');
+const {checkPermission} = require('../middleware/checkPermission'); 
 
-const {getAllPurchase,updatePurchaseReturnById,createPurchaseReturn,deletePurchaseReturnById}=require('../controllers/PurchaseReturn');
-router.get('/purchase-return',getAllPurchase);
-router.put('/purchase-return/:id',updatePurchaseReturnById);
-router.post('/purchase-return',createPurchaseReturn);
-router.delete('/purchase-return/:id',deletePurchaseReturnById);
+router.get('/purchase-return', checkPermission('viewAllPurchaseOrder'), getAllPurchase);
+router.put('/purchase-return/:id', checkPermission('editPurchaseOrder'), updatePurchaseReturnById);
+router.post('/purchase-return', checkPermission('createPurchaseOrder'), createPurchaseReturn);
+router.delete('/purchase-return/:id', checkPermission('deletePurchaseOrder'), deletePurchaseReturnById);
 
-
-
-module.exports=router;
+module.exports = router;

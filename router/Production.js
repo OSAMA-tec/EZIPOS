@@ -1,7 +1,7 @@
 const express=require('express');
 const router=express.Router();
 const {getAllProduction,createNewProduction,viewProductionById,updateProductionById}=require('../controllers/Production');
-const checkPermission = require('../middleware/checkPermission'); 
+const {checkPermission} = require('../middleware/checkPermission'); 
 
 router.get('/manufacturing/production', checkPermission('accessProduction'), getAllProduction);
 router.post('/manufacturing/production/create', checkPermission('accessProduction'), createNewProduction);

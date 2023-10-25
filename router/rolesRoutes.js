@@ -1,18 +1,22 @@
-// routes/rolesRoutes.js
+// routes/quotationsRoutes.js
 const express = require('express');
 const router = express.Router();
-const rolesController = require('../controllers/rolesController');
+const quotationsController = require('../controllers/quotationsController');
+const {checkPermission} = require('../middleware/checkPermission'); 
 
-// GET /roles
-router.get('/', rolesController.getAllRoles);
+// GET /quotations/all-records
+router.get('/all-records', checkPermission('viewAllQuotations'), quotationsController.getAllQuotations);
 
-// POST /roles
-router.post('/', rolesController.createRole);
+// POST /quotations
+router.post('/', checkPermission('editQuotation'), quotationsController.createQuotation);
 
-// PUT /roles/:id
-router.put('/:id', rolesController.updateRole);
+// GET /quotations/:id
+router.get('/:id', checkPermission('viewAllQuotations'), quotationsController.getQuotationById);
 
-// DELETE /roles/:id
-router.delete('/:id', rolesController.deleteRole);
+// PUT /quotations/:id
+router.put('/:id', checkPermission('editQuotation'), quotationsController.updateQuotation);
+
+// DELETE /quotations/:id
+router.delete('/:id', checkPermission('deleteQuotation'), quotationsController.deleteQuotation);
 
 module.exports = router;

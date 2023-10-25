@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const financialController = require('../controllers/financialController');
-const checkPermission = require('../middleware/checkPermission'); 
+const {checkPermission} = require('../middleware/checkPermission'); 
 
 // GET /balance-sheet
 router.get('/balance-sheet', checkPermission('viewHomeData'), financialController.getBalanceSheet);

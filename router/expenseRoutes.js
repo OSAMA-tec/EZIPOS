@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const expenseController = require('../controllers/expenseController');
-const checkPermission = require('../middleware/checkPermission');
+const {checkPermission} = require('../middleware/checkPermission');
 
 // Routes for expenses
 router.post('/', checkPermission('addExpense'), expenseController.createExpense);

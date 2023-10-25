@@ -1,20 +1,25 @@
+// routes/salesRoutes.js
 const express = require('express');
 const router = express.Router();
-const sellingPriceGroupController = require('../controllers/sellingPriceGroupController');
+const salesController = require('../controllers/salesController');
+const {checkPermission} = require('../middleware/checkPermission'); 
 
-//  add Route
-router.post('/', sellingPriceGroupController.addSellingPriceGroup);
+// GET Sales Shipment Status
+router.get('/shipments', checkPermission('accessAllShipments'), salesController.saleShipment);
 
-// delete Route 
-router.delete('/:id', sellingPriceGroupController.deleteSellingPriceGroup);
+// GET /sales/all-records
+router.get('/:type', checkPermission('viewAllSell'), salesController.getAllSales);
 
-// edit Route
-router.put('/:id', sellingPriceGroupController.editSellingPriceGroup);
+// POST /sales
+router.post('/:type', checkPermission('addSell'), salesController.createSale);
 
-// Get /userbyid
-router.get('/:id', sellingPriceGroupController.getSellingPriceGroupById);
+// GET /sales/:id
+router.get('/:type/:id', checkPermission('viewAllSell'), salesController.getSaleById);
 
-// GET /all spgs
-router.get('/', sellingPriceGroupController.getAllSellingPriceGroup);
+// PUT /sales/:id
+router.put('/:type/:id', checkPermission('updateSell'), salesController.updateSale);
+
+// DELETE /sales/:id
+router.delete('/:type/:id', checkPermission('deleteSell'), salesController.deleteSale);
 
 module.exports = router;

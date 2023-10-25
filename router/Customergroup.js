@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const { getAllCustomerGroups, createCustomerGroup, updateCustomerGroup, deleteCustomerGroup } = require("../controllers/CustomerGroup");
-const checkPermission = require('../middleware/checkPermission');
+const {checkPermission} = require('../middleware/checkPermission');
 
 router.get('/contact/customergroup', checkPermission('viewCustomerGroup'), getAllCustomerGroups);
 
