@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const quotationsController = require('../controllers/quotationsController');
 const {checkPermission} = require('../middleware/checkPermission'); 
+const authMiddleware = require('../middleware/authMiddleware'); 
 
 // GET /quotations/all-records
 router.get('/all-records', checkPermission('viewAllQuotations'), quotationsController.getAllQuotations);

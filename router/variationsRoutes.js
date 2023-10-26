@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const variationsController = require('../controllers/variationsController');
 const {checkPermission} = require('../middleware/checkPermission'); 
+const authMiddleware = require('../middleware/authMiddleware'); 
 
 // GET /variations/all-records
 router.get('/all-records', checkPermission('viewProduct'), variationsController.getAllVariations);

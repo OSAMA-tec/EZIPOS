@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const usersController = require('../controllers/usersController');
 const {checkPermission} = require('../middleware/checkPermission'); 
+const authMiddleware = require('../middleware/authMiddleware'); 
 
 // GET /users
 router.get('/', checkPermission('viewUser'), usersController.getAllUsers);

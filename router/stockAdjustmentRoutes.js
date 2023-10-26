@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const stockAdjustmentController = require('../controllers/stockAdjustmentController');
 const {checkPermission} = require('../middleware/checkPermission'); 
+const authMiddleware = require('../middleware/authMiddleware'); 
 
 // Routes for stock adjustments
 router.post('/', checkPermission('addStockAdjustment'), stockAdjustmentController.createStockAdjustment);

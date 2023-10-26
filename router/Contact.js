@@ -12,6 +12,7 @@ const { getAllContacts, createSupplierContact, updateSupplierContact,
     exportContacts
 } = require("../controllers/Contact");
 const {checkPermission} = require('../middleware/checkPermission'); 
+const authMiddleware = require('../middleware/authMiddleware'); 
 
 router.get('/contacts/:type', checkPermission('viewAllCustomer'), getAllContacts);
 

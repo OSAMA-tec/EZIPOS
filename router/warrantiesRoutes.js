@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const warrantiesController = require('../controllers/warrantiesController');
 const {checkPermission} = require('../middleware/checkPermission'); 
+const authMiddleware = require('../middleware/authMiddleware'); 
 
 // GET /warranties/all-records
 router.get('/', checkPermission('viewProduct'), warrantiesController.getAllWarranties);

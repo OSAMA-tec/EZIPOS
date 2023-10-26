@@ -4,7 +4,7 @@ const User = require('../models/addUser');
 // Get all users
 exports.getAllUsers = async (req, res) => {
     try {
-        const users = await User.find().populate('role', 'name'); // Populate the 'role' field with role names
+        const users = await User.find().populate('role', 'name'); 
         res.status(200).json(users);
     } catch (error) {
         console.error(error);

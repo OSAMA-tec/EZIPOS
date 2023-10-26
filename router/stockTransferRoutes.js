@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const stockTransferController = require('../controllers/stockTransfersController');
 const {checkPermission} = require('../middleware/checkPermission'); 
+const authMiddleware = require('../middleware/authMiddleware'); 
 
 // Routes for stock transfers
 router.post('/', checkPermission('addStockTransfer'), stockTransferController.createStockTransfer);

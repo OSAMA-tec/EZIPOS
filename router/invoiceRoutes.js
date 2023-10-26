@@ -3,6 +3,7 @@ const express = require('express');
 const router = express.Router();
 const invoiceController = require('../controllers/invoiceController');
 const {checkPermission} = require('../middleware/checkPermission'); 
+const authMiddleware = require('../middleware/authMiddleware'); 
 
 router.post('', checkPermission('addSell'), invoiceController.createInvoice);
 

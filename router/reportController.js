@@ -15,6 +15,7 @@ const {registerReport} = require('../controllers/Report/Register/registerReport'
 const {getSalesReport} = require('../controllers/Report/Sales/saleRes');
 const {getTaxReport} = require('../controllers/Report/Tax/taxReport');
 const {checkPermission} = require('../middleware/checkPermission'); 
+const authMiddleware = require('../middleware/authMiddleware'); 
 
 // Routes for profit 
 router.get('/profit', checkPermission('viewProfit'), profitGet);
