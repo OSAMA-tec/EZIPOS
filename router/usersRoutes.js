@@ -6,18 +6,18 @@ const {checkPermission} = require('../middleware/checkPermission');
 const authMiddleware = require('../middleware/authMiddleware'); 
 
 // GET /users
-router.get('/', checkPermission('viewUser'), usersController.getAllUsers);
+router.get('/',authMiddleware, checkPermission('viewUser'), usersController.getAllUsers);
 
 // POST /users
-router.post('/', checkPermission('addUser'), usersController.createUser);
+router.post('/',authMiddleware, checkPermission('addUser'), usersController.createUser);
 
 // PUT /users/:id
-router.put('/:id', checkPermission('editUser'), usersController.updateUser);
+router.put('/:id',authMiddleware, checkPermission('editUser'), usersController.updateUser);
 
 // DELETE /users/:id
-router.delete('/:id', checkPermission('deleteUser'), usersController.deleteUser);
+router.delete('/:id', authMiddleware,checkPermission('deleteUser'), usersController.deleteUser);
 
 // Get /userbyid
-router.get('/:id', checkPermission('viewUser'), usersController.getUserById);
+router.get('/:id',authMiddleware, checkPermission('viewUser'), usersController.getUserById);
 
 module.exports = router;

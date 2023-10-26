@@ -14,23 +14,23 @@ const { getAllContacts, createSupplierContact, updateSupplierContact,
 const {checkPermission} = require('../middleware/checkPermission'); 
 const authMiddleware = require('../middleware/authMiddleware'); 
 
-router.get('/contacts/:type', checkPermission('viewAllCustomer'), getAllContacts);
+router.get('/contacts/:type',authMiddleware, checkPermission('viewAllCustomer'), getAllContacts);
 
-router.get('/contacts/:type/export', checkPermission('viewExport'), exportContacts);
+router.get('/contacts/:type/export',authMiddleware, checkPermission('viewExport'), exportContacts);
 
 // supplier routes
-router.post('/contacts/:type', checkPermission('addSupplier'), createSupplierContact);
-router.put('/contacts/supplier/:id', checkPermission('editSupplier'), updateSupplierContact);
-router.delete('/contacts/supplier/:id', checkPermission('deleteSupplier'), deleteSupplierContact);
-router.get('/contacts/:type/:id', checkPermission('viewAllSupplier'), getSupplierContactById);
-router.delete('/contacts/supplier', checkPermission('deleteSupplier'), deleteAllSupplierContacts);
+router.post('/contacts/:type',authMiddleware, checkPermission('addSupplier'), createSupplierContact);
+router.put('/contacts/supplier/:id',authMiddleware, checkPermission('editSupplier'), updateSupplierContact);
+router.delete('/contacts/supplier/:id',authMiddleware, checkPermission('deleteSupplier'), deleteSupplierContact);
+router.get('/contacts/:type/:id',authMiddleware, checkPermission('viewAllSupplier'), getSupplierContactById);
+router.delete('/contacts/supplier',authMiddleware, checkPermission('deleteSupplier'), deleteAllSupplierContacts);
 
 // customer routes
-router.post('/contacts/customer', checkPermission('addCustomer'), createCustomerContact);
-router.put('/contacts/customer/:id', checkPermission('editCustomer'), updateCustomerContact);
-router.delete('/contacts/customer/:id', checkPermission('deleteCustomer'), deleteCustomerContact);
-router.get('/contacts/customer/:id', checkPermission('viewAllCustomer'), getCustomerContactById);
-router.delete('/contacts/customer', checkPermission('deleteCustomer'), deleteAllCustomerContacts);
+router.post('/contacts/customer',authMiddleware, checkPermission('addCustomer'), createCustomerContact);
+router.put('/contacts/customer/:id',authMiddleware, checkPermission('editCustomer'), updateCustomerContact);
+router.delete('/contacts/customer/:id',authMiddleware, checkPermission('deleteCustomer'), deleteCustomerContact);
+router.get('/contacts/customer/:id', authMiddleware,checkPermission('viewAllCustomer'), getCustomerContactById);
+router.delete('/contacts/customer',authMiddleware, checkPermission('deleteCustomer'), deleteAllCustomerContacts);
 
 module.exports = router;
 

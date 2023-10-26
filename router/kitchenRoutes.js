@@ -5,9 +5,9 @@ const {checkPermission} = require('../middleware/checkPermission');
 const authMiddleware = require('../middleware/authMiddleware'); 
 
 // GET /kitchen
-router.get('/', checkPermission('viewHomeData'), kitchenController.getKitchenOrders);
+router.get('/',authMiddleware, checkPermission('viewHomeData'), kitchenController.getKitchenOrders);
 
 // POST /mark-as-cooked
-router.post('/mark-as-cooked', checkPermission('serviceStaff'), kitchenController.markOrderAsCooked);
+router.post('/mark-as-cooked',authMiddleware, checkPermission('serviceStaff'), kitchenController.markOrderAsCooked);
 
 module.exports = router;

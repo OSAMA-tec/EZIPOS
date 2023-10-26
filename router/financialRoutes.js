@@ -5,15 +5,15 @@ const {checkPermission} = require('../middleware/checkPermission');
 const authMiddleware = require('../middleware/authMiddleware'); 
 
 // GET /balance-sheet
-router.get('/balance-sheet', checkPermission('viewHomeData'), financialController.getBalanceSheet);
+router.get('/balance-sheet',authMiddleware, checkPermission('viewHomeData'), financialController.getBalanceSheet);
 
 // GET /trial-stock
-router.get('/trial-stock', checkPermission('viewHomeData'), financialController.getBalanceSheet); 
+router.get('/trial-stock',authMiddleware, checkPermission('viewHomeData'), financialController.getBalanceSheet); 
 
 // GET /cash-flow
-router.get('/cash-flow', checkPermission('viewHomeData'), financialController.getCashFlow);
+router.get('/cash-flow',authMiddleware, checkPermission('viewHomeData'), financialController.getCashFlow);
 
 // GET /payment-account-report
-router.get('/payment-account-report', checkPermission('viewHomeData'), financialController.getPaymentAccountReport);
+router.get('/payment-account-report', authMiddleware,checkPermission('viewHomeData'), financialController.getPaymentAccountReport);
 
 module.exports = router;

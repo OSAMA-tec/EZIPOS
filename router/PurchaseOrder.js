@@ -4,9 +4,9 @@ const {getAllPurchaseOrder,addPurchaseOrder,updatePurchaseOrder,deletePurchaseOr
 const {checkPermission} = require('../middleware/checkPermission'); 
 const authMiddleware = require('../middleware/authMiddleware'); 
 
-router.get('/purchase-order', checkPermission('viewAllPurchaseOrder'), getAllPurchaseOrder);
-router.post('/purchase-order/create', checkPermission('createPurchaseOrder'), addPurchaseOrder);
-router.put('/purchase-order/:id', checkPermission('editPurchaseOrder'), updatePurchaseOrder);
-router.delete('/purchase-order/:id', checkPermission('deletePurchaseOrder'), deletePurchaseOrder);
+router.get('/purchase-order', authMiddleware,checkPermission('viewAllPurchaseOrder'), getAllPurchaseOrder);
+router.post('/purchase-order/create', authMiddleware,checkPermission('createPurchaseOrder'), addPurchaseOrder);
+router.put('/purchase-order/:id',authMiddleware, checkPermission('editPurchaseOrder'), updatePurchaseOrder);
+router.delete('/purchase-order/:id', authMiddleware,checkPermission('deletePurchaseOrder'), deletePurchaseOrder);
 
 module.exports=router;

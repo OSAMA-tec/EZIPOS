@@ -6,21 +6,21 @@ const {checkPermission} = require('../middleware/checkPermission');
 const authMiddleware = require('../middleware/authMiddleware'); 
 
 // GET Sales Shipment Status
-router.get('/shipments', checkPermission('accessAllShipments'), salesController.saleShipment);
+router.get('/shipments', authMiddleware,checkPermission('accessAllShipments'), salesController.saleShipment);
 
 // GET /sales/all-records
-router.get('/:type', checkPermission('viewAllSell'), salesController.getAllSales);
+router.get('/:type', authMiddleware,checkPermission('viewAllSell'), salesController.getAllSales);
 
 // POST /sales
-router.post('/:type', checkPermission('addSell'), salesController.createSale);
+router.post('/:type', authMiddleware,checkPermission('addSell'), salesController.createSale);
 
 // GET /sales/:id
-router.get('/:type/:id', checkPermission('viewAllSell'), salesController.getSaleById);
+router.get('/:type/:id',authMiddleware, checkPermission('viewAllSell'), salesController.getSaleById);
 
 // PUT /sales/:id
-router.put('/:type/:id', checkPermission('updateSell'), salesController.updateSale);
+router.put('/:type/:id',authMiddleware, checkPermission('updateSell'), salesController.updateSale);
 
 // DELETE /sales/:id
-router.delete('/:type/:id', checkPermission('deleteSell'), salesController.deleteSale);
+router.delete('/:type/:id',authMiddleware, checkPermission('deleteSell'), salesController.deleteSale);
 
 module.exports = router;

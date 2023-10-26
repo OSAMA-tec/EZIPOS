@@ -6,14 +6,14 @@ const {checkPermission} = require('../middleware/checkPermission');
 const authMiddleware = require('../middleware/authMiddleware'); 
 
 // Routes for stock adjustments
-router.post('/', checkPermission('addStockAdjustment'), stockAdjustmentController.createStockAdjustment);
+router.post('/', authMiddleware,checkPermission('addStockAdjustment'), stockAdjustmentController.createStockAdjustment);
 
-router.put('/:id', checkPermission('editStockAdjustment'), stockAdjustmentController.updateStockAdjustment);
+router.put('/:id', authMiddleware,checkPermission('editStockAdjustment'), stockAdjustmentController.updateStockAdjustment);
 
-router.delete('/:id', checkPermission('deleteStockAdjustment'), stockAdjustmentController.deleteStockAdjustment);
+router.delete('/:id',authMiddleware, checkPermission('deleteStockAdjustment'), stockAdjustmentController.deleteStockAdjustment);
 
-router.get('/:id', checkPermission('viewStockAdjustment'), stockAdjustmentController.getStockAdjustmentById);
+router.get('/:id', authMiddleware,checkPermission('viewStockAdjustment'), stockAdjustmentController.getStockAdjustmentById);
 
-router.get('/', checkPermission('viewAllStockAdjustments'), stockAdjustmentController.getAllStockAdjustments);
+router.get('/',authMiddleware, checkPermission('viewAllStockAdjustments'), stockAdjustmentController.getAllStockAdjustments);
 
 module.exports = router;

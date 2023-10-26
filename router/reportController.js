@@ -18,39 +18,39 @@ const {checkPermission} = require('../middleware/checkPermission');
 const authMiddleware = require('../middleware/authMiddleware'); 
 
 // Routes for profit 
-router.get('/profit', checkPermission('viewProfit'), profitGet);
-router.get('/profit/category', checkPermission('viewProfit'), profitbyType);
+router.get('/profit',authMiddleware, checkPermission('viewProfit'), profitGet);
+router.get('/profit/category',authMiddleware, checkPermission('viewProfit'), profitbyType);
 
 //Routes for Purchase Sale
-router.get('/purchase/:range', checkPermission('viewPurchaseSale'), purchaseSale);
+router.get('/purchase/:range',authMiddleware, checkPermission('viewPurchaseSale'), purchaseSale);
 
 //ALL STOCKS REPORT
-router.get('/stock', checkPermission('viewStockReport'), stockReport);
-router.get('/stockadjustment', checkPermission('viewStockAdjustment'), StockAdjustment);
+router.get('/stock',authMiddleware, checkPermission('viewStockReport'), stockReport);
+router.get('/stockadjustment', authMiddleware,checkPermission('viewStockAdjustment'), StockAdjustment);
 
 //Items Report
-router.get('/items', checkPermission('viewItemsReport'), itemsReport);
+router.get('/items', authMiddleware,checkPermission('viewItemsReport'), itemsReport);
 
 //Product report
-router.get('/product-purchase', checkPermission('viewProductPurchase'), productPurchase);
-router.get('/product-sale', checkPermission('viewProductSale'), productSale);
+router.get('/product-purchase',authMiddleware, checkPermission('viewProductPurchase'), productPurchase);
+router.get('/product-sale', authMiddleware,checkPermission('viewProductSale'), productSale);
 
 //Purchase
-router.get('/purchase-payment', checkPermission('viewPurchasePayment'), generateReport);
+router.get('/purchase-payment',authMiddleware, checkPermission('viewPurchasePayment'), generateReport);
 
 //Lot
-router.get('/lot', checkPermission('viewLotReport'), getLotReport);
+router.get('/lot',authMiddleware, checkPermission('viewLotReport'), getLotReport);
 
 //Sell
-router.get('/sell-payment', checkPermission('viewSellPaymentReport'), getSellPaymentReport);
+router.get('/sell-payment',authMiddleware, checkPermission('viewSellPaymentReport'), getSellPaymentReport);
 
 //Register
-router.get('/register-report', checkPermission('viewRegisterReport'), registerReport);
+router.get('/register-report',authMiddleware, checkPermission('viewRegisterReport'), registerReport);
 
 //Sale Representative
-router.get('/sale-representative', checkPermission('viewSalesReport'), getSalesReport);
+router.get('/sale-representative', authMiddleware,checkPermission('viewSalesReport'), getSalesReport);
 
 //Tax Report
-router.get('/tax-report', checkPermission('viewTaxReport'), getTaxReport);
+router.get('/tax-report',authMiddleware, checkPermission('viewTaxReport'), getTaxReport);
 
 module.exports = router;

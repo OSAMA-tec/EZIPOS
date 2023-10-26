@@ -6,18 +6,18 @@ const {checkPermission} = require('../middleware/checkPermission');
 const authMiddleware = require('../middleware/authMiddleware'); 
 
 // GET /quotations/all-records
-router.get('/all-records', checkPermission('viewAllQuotations'), quotationsController.getAllQuotations);
+router.get('/all-records',authMiddleware, checkPermission('viewAllQuotations'), quotationsController.getAllQuotations);
 
 // POST /quotations
-router.post('/', checkPermission('editQuotation'), quotationsController.createQuotation);
+router.post('/',authMiddleware, checkPermission('editQuotation'), quotationsController.createQuotation);
 
 // GET /quotations/:id
-router.get('/:id', checkPermission('viewAllQuotations'), quotationsController.getQuotationById);
+router.get('/:id',authMiddleware, checkPermission('viewAllQuotations'), quotationsController.getQuotationById);
 
 // PUT /quotations/:id
-router.put('/:id', checkPermission('editQuotation'), quotationsController.updateQuotation);
+router.put('/:id',authMiddleware, checkPermission('editQuotation'), quotationsController.updateQuotation);
 
 // DELETE /quotations/:id
-router.delete('/:id', checkPermission('deleteQuotation'), quotationsController.deleteQuotation);
+router.delete('/:id', authMiddleware,checkPermission('deleteQuotation'), quotationsController.deleteQuotation);
 
 module.exports = router;

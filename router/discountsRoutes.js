@@ -5,18 +5,18 @@ const {checkPermission} = require('../middleware/checkPermission');
 const authMiddleware = require('../middleware/authMiddleware'); 
 
 // POST /discounts
-router.post('/', checkPermission('addEditDeleteDiscount'), discountsController.createDiscount);
+router.post('/',authMiddleware, checkPermission('addEditDeleteDiscount'), discountsController.createDiscount);
 
 // PUT /discounts/:id
-router.put('/:id', checkPermission('addEditDeleteDiscount'), discountsController.updateDiscount);
+router.put('/:id', authMiddleware,checkPermission('addEditDeleteDiscount'), discountsController.updateDiscount);
 
 // DELETE /discounts/:id
-router.delete('/:id', checkPermission('addEditDeleteDiscount'), discountsController.deleteDiscount);
+router.delete('/:id',authMiddleware, checkPermission('addEditDeleteDiscount'), discountsController.deleteDiscount);
 
 // GET /discounts/:id
-router.get('/:id', checkPermission('addEditDeleteDiscount'), discountsController.getDiscountById);
+router.get('/:id', authMiddleware,checkPermission('addEditDeleteDiscount'), discountsController.getDiscountById);
 
 // GET /discounts
-router.get('/', checkPermission('addEditDeleteDiscount'), discountsController.getAllDiscounts);
+router.get('/',authMiddleware, checkPermission('addEditDeleteDiscount'), discountsController.getAllDiscounts);
 
 module.exports = router;

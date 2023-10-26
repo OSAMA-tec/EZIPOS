@@ -5,6 +5,6 @@ const {checkPermission} = require('../middleware/checkPermission');
 const authMiddleware = require('../middleware/authMiddleware'); 
 
 // PUT /businessSettings
-router.put('/', checkPermission('accessBusinessSettings'), businessSettingsController.updateAdmin);
+router.put('/',authMiddleware, checkPermission('accessBusinessSettings'), businessSettingsController.updateAdmin);
 
 module.exports = router;

@@ -4,9 +4,9 @@ const {getAllProduction,createNewProduction,viewProductionById,updateProductionB
 const {checkPermission} = require('../middleware/checkPermission'); 
 const authMiddleware = require('../middleware/authMiddleware'); 
 
-router.get('/manufacturing/production', checkPermission('accessProduction'), getAllProduction);
-router.post('/manufacturing/production/create', checkPermission('accessProduction'), createNewProduction);
-router.get('/manufacturing/production/:id', checkPermission('accessProduction'), viewProductionById);
-router.put('/manufacturing/production/:id', checkPermission('accessProduction'), updateProductionById);
+router.get('/manufacturing/production',authMiddleware, checkPermission('accessProduction'), getAllProduction);
+router.post('/manufacturing/production/create',authMiddleware, checkPermission('accessProduction'), createNewProduction);
+router.get('/manufacturing/production/:id', authMiddleware,checkPermission('accessProduction'), viewProductionById);
+router.put('/manufacturing/production/:id',authMiddleware, checkPermission('accessProduction'), updateProductionById);
 
 module.exports=router;
