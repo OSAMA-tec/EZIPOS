@@ -19,11 +19,6 @@ exports.login = async (req, res) => {
         let role;
         if (user && user.password === password) {
             role = 'Admin';
-            roleModel = await Role.findOne({ userId: user._id });
-            if (!roleModel) {
-                roleModel = new Role({ userId: user._id });
-                await roleModel.save();
-            }
         } else if (userInUserSchema && userInUserSchema.password === password) {
             role = 'User';
             roleModel = await Role.findOne({ userId: userInUserSchema._id });
@@ -35,14 +30,16 @@ exports.login = async (req, res) => {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
 
-        // Create a JWT
+        if (userInUserSchema && userInUserSchema.role) {
+            roleModel = await Role.findById(userInUserSchema.role);
+        }
+
         const token = jwt.sign(
-            { userName, role, roleModel },
+            { userName, role, ...(roleModel && { roleModel }) },
             process.env.JWT_SECRET,
             { expiresIn: '60d' } 
         );
 
-        // Send the token in the response
         return res.status(200).json({ message: `Login successful for ${role}`, token });
 
     } catch (error) {
