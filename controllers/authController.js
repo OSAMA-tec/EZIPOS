@@ -1,6 +1,6 @@
 // controllers/authController.js
 const Admin = require('../models/admin');
-const User = require('../models/addUser'); 
+const User = require('../models/addUser');
 const Role = require('../models/roles');
 
 
@@ -19,15 +19,19 @@ exports.login = async (req, res) => {
         let role;
         if (user && user.password === password) {
             role = 'Admin';
-            Id=user._id
+            Id = user._id
         } else if (userInUserSchema && userInUserSchema.password === password) {
             role = 'User';
-            roleModel = await Role.findOne({ userId: userInUserSchema._id });
-            if (!roleModel) {
-                roleModel = new Role({ userId: userInUserSchema._id });
-                await roleModel.save();
+            if (userInUserSchema.role) {
+                roleModel = await Role.findById(userInUserSchema.role);
+                if (!roleModel) {
+                    return res.status(401).json({ message: 'Invalid role' });
+                }
+            } else {
+                return res.status(401).json({ message: 'No role assigned to user' });
             }
-            Id=userInUserSchema._id
+            Id = userInUserSchema._id
+
         } else {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
@@ -37,9 +41,9 @@ exports.login = async (req, res) => {
         }
 
         const token = jwt.sign(
-            { Id,userName, role, ...(roleModel && { roleModel }) },
+            { Id, userName, role, ...(roleModel && { roleModel }) },
             process.env.JWT_SECRET,
-            { expiresIn: '60d' } 
+            { expiresIn: '60d' }
         );
 
         return res.status(200).json({ message: `Login successful for ${role}`, token });
