@@ -10,7 +10,7 @@ exports.login = async (req, res) => {
     try {
         const user = await Admin.findOne({ userName }).lean();
         const userInUserSchema = await User.findOne({ userName }).lean();
-
+        let Id;
         if (!user && !userInUserSchema) {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
@@ -19,6 +19,7 @@ exports.login = async (req, res) => {
         let role;
         if (user && user.password === password) {
             role = 'Admin';
+            Id=user._id
         } else if (userInUserSchema && userInUserSchema.password === password) {
             role = 'User';
             roleModel = await Role.findOne({ userId: userInUserSchema._id });
@@ -26,6 +27,7 @@ exports.login = async (req, res) => {
                 roleModel = new Role({ userId: userInUserSchema._id });
                 await roleModel.save();
             }
+            Id=userInUserSchema._id
         } else {
             return res.status(401).json({ message: 'Invalid credentials' });
         }
@@ -35,7 +37,7 @@ exports.login = async (req, res) => {
         }
 
         const token = jwt.sign(
-            { userName, role, ...(roleModel && { roleModel }) },
+            { Id,userName, role, ...(roleModel && { roleModel }) },
             process.env.JWT_SECRET,
             { expiresIn: '60d' } 
         );
