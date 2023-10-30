@@ -23,7 +23,6 @@ const productPurchase = async (req, res) => {
         startDate = moment().subtract(7, 'days').startOf('day');
         endDate = moment().endOf('day');
         break;
-      // Add the remaining cases...
       default:
         startDate = moment().startOf('year');
         endDate = moment().endOf('year');
@@ -39,7 +38,6 @@ const productPurchase = async (req, res) => {
       const productStockAdjustments = stockAdjustments.filter(sa => sa.productName._id.equals(product._id));
       const productStockTransfers = stockTransfers.filter(st => st.productName._id.equals(product._id));
 
-      // If there are no sales, stock adjustments, or stock transfers for this product, return an empty array
       if (productSales.length === 0 && productStockAdjustments.length === 0 && productStockTransfers.length === 0) {
         return [];
       }
@@ -47,7 +45,7 @@ const productPurchase = async (req, res) => {
       return productSales.map(sale => ({
         product: product.productName,
         sku: product.sku,
-        supplier: '', // Add supplier if available in your schema
+        supplier: '', // Add supplier 
         referenceNumber: sale.invoiceNumber,
         date: sale.saleDate,
         quantity: sale.quantity,
