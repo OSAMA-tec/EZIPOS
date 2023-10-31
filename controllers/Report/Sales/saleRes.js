@@ -14,7 +14,7 @@ const getSalesReport = async (req, res) => {
     const report = sales.map(sale => {
       const payment = payments.find(payment => payment.sale._id.toString() === sale._id.toString());
       return {
-        date: sale.createdAt, // Assuming the Sale schema has a createdAt field
+        date: sale.createdAt,
         invoiceNumber: sale.invoiceNumber,
         customerName: sale.customer.name,
         location: sale.location.name,

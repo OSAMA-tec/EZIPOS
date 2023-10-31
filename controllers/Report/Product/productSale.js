@@ -25,7 +25,6 @@ const productSale = async (req, res) => {
         startDate = moment().subtract(7, 'days').startOf('day');
         endDate = moment().endOf('day');
         break;
-      // ... handle other cases similarly ...
       default:
         res.status(400).json({ error: 'Invalid period' });
         return;
