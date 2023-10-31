@@ -48,6 +48,7 @@ const production_m=require("./router/Production")
 // const kitchenRoutes = require('./router/kitchenRoutes');
 const invoiceRoutes = require('./router/invoiceRoutes');
 const reportRoute = require('./router/reportController');
+const customLabelRoute = require('./router/customLabelRoute');
 
 const PORT = process.env.PORT || 8000;
 
@@ -107,6 +108,7 @@ app.use('/admin/business-locations', businessLocationRoutes);
 app.use('/admin/reports', reportRoute);
 
 
+app.use('/admin', customLabelRoute);
 
 
 
